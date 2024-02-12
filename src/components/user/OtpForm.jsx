@@ -55,7 +55,7 @@ const OtpForm = () => {
                         </div>
 
                         <div className="form-control mt-6">
-                            <SubmitButton onClick={handleSubmit} text={"Next"}/>
+                            <SubmitButton onClick={handleSubmit} text={"Submit"}/>
                         </div>
                     </div>
                 </div>

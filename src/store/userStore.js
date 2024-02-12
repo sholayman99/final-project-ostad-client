@@ -27,6 +27,16 @@ const userStore =create((set)=>({
         }))
     },
 
+    loginFormValue:{email: "", password: ""},
+    loginValueOnChange:(name,value)=>{
+        set((state)=>({
+            loginFormValue:{
+                ...state.loginFormValue,
+                [name]:value
+            }
+        }))
+    },
+
     createAccountRequest:async(postBody)=>{
         set({isFormSubmit:true})
         setEmail(postBody.email);
@@ -41,6 +51,14 @@ const userStore =create((set)=>({
         let res = await axios.post(`${baseUrl}/verifyUser/${email}/${otp}`);
         set({isFormSubmit:false})
         return res.data['status'] === 'success';
+    },
+
+    userLoginRequest:async(postBody)=>{
+        set({isFormSubmit:true})
+        let res = await axios.post(`${baseUrl}/loginUser`,postBody);
+        set({isFormSubmit:false})
+        return res.data['status'] === 'success';
+
     },
 
 
