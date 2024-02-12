@@ -13,13 +13,13 @@ const AccountForm = () => {
 
 
     const handleSubmit = async()=>{
-       if(!validator.isEmail(accountFormValue.email) && validator.isNull(accountFormValue.email)){
+       if(!validator.isEmail(accountFormValue.email) || validator.isNull(accountFormValue.email)){
            toast.error("Provide a valid email")
        }
-       else if(!validator.isPassword(accountFormValue.password) && validator.isNull(accountFormValue.password)){
+       else if(!validator.isPassword(accountFormValue.password) || validator.isNull(accountFormValue.password)){
            toast.error("Password must contains 8 characters, at least one letter, one number and one special character")
        }
-       else if(!validator.isMobile(accountFormValue.mobile) && validator.isNull(accountFormValue.mobile)){
+       else if(!validator.isMobile(accountFormValue.mobile) || validator.isNull(accountFormValue.mobile)){
           toast.error("Provide a valid Bangladeshi number")
        } else if(accountFormValue.avatar === ""){
            accountFormValue.avatar = 'https://i.ibb.co/7XLTDWv/user.png'
