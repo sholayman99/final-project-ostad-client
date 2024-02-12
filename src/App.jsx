@@ -12,7 +12,7 @@ import OtpPage from "./pages/OtpPage.jsx";
 
 const App = () => {
     return (
-        <div className={"max-w-screen-2xl mx-auto"}>
+        <div className={"max-w-screen-2xl font-poppins mx-auto"}>
             <BrowserRouter>
                 <Routes>
                     <Route path={"/"} element={ <HomePage /> } />
