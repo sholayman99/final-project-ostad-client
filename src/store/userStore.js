@@ -16,9 +16,10 @@ const userStore =create((set)=>({
         }))
     },
 
-    createAccountRequest:async()=>{
-        let res = await axios.post(`${baseUrl}/createUser`);
-
+    createAccountRequest:async(postBody)=>{
+        set({isFormSubmit:true})
+        let res = await axios.post(`${baseUrl}/createUser`,postBody);
+        set({isFormSubmit:false})
         return res.data['status'] === 'success';
     },
 

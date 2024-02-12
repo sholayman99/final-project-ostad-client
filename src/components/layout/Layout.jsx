@@ -8,7 +8,7 @@ const Layout = ( {children}) => {
         <>
            <AppNavbar />
             {children}
-            <Toaster position={"top-center"} />
+            <Toaster position={"top-center"} gutter={8}   toastOptions={{duration: 5000}}/>
             <Footer />
         </>
     );

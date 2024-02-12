@@ -1,17 +1,39 @@
 import React from 'react';
 import signup from "../../assets/images/signup.jpg"
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import userStore from "../../store/userStore.js";
 import SubmitButton from "./SubmitButton.jsx";
+import validator from "../../utility/validator.js";
+import toast from "react-hot-toast";
 
 
 const AccountForm = () => {
-
+    const navigate = useNavigate();
     const {accountFormValue,accountFormOnChange,createAccountRequest} = userStore();
 
 
     const handleSubmit = async()=>{
-
+       if(!validator.isEmail(accountFormValue.email) && validator.isNull(accountFormValue.email)){
+           toast.error("Provide a valid email")
+       }
+       else if(!validator.isPassword(accountFormValue.password) && validator.isNull(accountFormValue.password)){
+           toast.error("Password must contains 8 characters, at least one letter, one number and one special character")
+       }
+       else if(!validator.isMobile(accountFormValue.mobile) && validator.isNull(accountFormValue.mobile)){
+          toast.error("Provide a valid Bangladeshi number")
+       } else if(accountFormValue.avatar === ""){
+           accountFormValue.avatar = 'https://i.ibb.co/7XLTDWv/user.png'
+       }
+       else{
+           let res = await createAccountRequest(accountFormValue);
+           if(res === true){
+               toast.success("Created account successfully");
+               navigate('/otp-verification');
+           }
+           else{
+               toast.error("Something went wrong!")
+           }
+       }
     }
 
 
@@ -75,8 +97,7 @@ const AccountForm = () => {
                                 </label>
                                 <input type="text" placeholder="Your avatar link" value={accountFormValue.avatar}
                                        className="input input-bordered input-primary"
-                                       onChange={(e) => accountFormOnChange("avatar", e.target.value)}
-                                       required/>
+                                       onChange={(e) => accountFormOnChange("avatar", e.target.value)} />
                             </div>
 
                         </div>

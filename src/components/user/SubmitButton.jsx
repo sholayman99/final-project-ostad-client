@@ -13,7 +13,7 @@ const SubmitButton = (props) => {
         </motion.button>
     } else {
         return (
-            <button className="btn btn-primary w-full md:w-[48%] mt-2 lg:w-[48%] bg-opacity-50 text-base-100">
+            <button className="btn btn-primary w-full md:w-[48%] mt-2 lg:w-[48%] bg-opacity-80 text-base-100">
                 <span className="loading loading-spinner"></span>
                 loading..
             </button>
