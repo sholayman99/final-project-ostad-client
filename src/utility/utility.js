@@ -1,8 +1,10 @@
+import Cookies from "js-cookie";
 
 export function unauthorized(code){
     if(code===401){
         sessionStorage.clear();
         localStorage.clear();
+        Cookies.remove("token")
         window.location.href="/login"
     }
 }

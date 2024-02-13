@@ -9,6 +9,7 @@ import toast from "react-hot-toast";
 const LoginForm = () => {
     const navigate = useNavigate();
     const {loginFormValue,loginValueOnChange,userLoginRequest} = userStore();
+    const {userInfoRequest} = userStore();
 
     const handleSubmit = async()=>{
         if(!validator.isEmail(loginFormValue.email) || validator.isNull(loginFormValue.email)){
@@ -19,6 +20,8 @@ const LoginForm = () => {
         }
         else{
             let res = await userLoginRequest(loginFormValue);
+            await userInfoRequest();
+
             if(res === true){
                 toast.success("logged in successfully");
                 navigate('/');

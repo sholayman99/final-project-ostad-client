@@ -2,12 +2,15 @@ import React from 'react';
 import FeaturedSkeleton from "../../skeleton/FeaturedSkeleton.jsx";
 import productStore from "../../store/productStore.js";
 import {motion} from "framer-motion";
+import {useNavigate} from "react-router-dom";
 
 const FeaturedProduct = () => {
-
+    const navigate = useNavigate();
     const {productList} = productStore();
 
-    console.log(productList)
+   const handleALL = ()=>{
+       navigate('/products')
+   }
 
     if(productList === null){
         return <FeaturedSkeleton />
@@ -40,6 +43,12 @@ const FeaturedProduct = () => {
                         })
                     }
                 </div>
+
+                <motion.button onClick={handleALL} whileHover={{scale: 1.1}} whileTap={{scale: 0.9}}
+                                transition={{type: "spring", stiffness: 400, damping: 17}}
+                    className={"bg-base-100 px-5 py-3 text-lg rounded-lg border border-primary shadow-2xl " +
+                        "font-semibold hover:bg-opacity-20"}>SEE ALL</motion.button>
+
             </section>
         );
     }

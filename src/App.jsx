@@ -12,7 +12,7 @@ import OtpPage from "./pages/OtpPage.jsx";
 import axios from "axios";
 
 const App = () => {
-    axios.defaults.baseURL = 'http://localhost:9000/api/v1';
+    axios.defaults.baseURL = 'http://localhost:5000/api/v1';
     return (
         <div className={"max-w-screen-2xl font-poppins mx-auto"}>
             <BrowserRouter>
@@ -22,8 +22,8 @@ const App = () => {
                     <Route path={"/login"} element={ <LoginPage /> } />
                     <Route path={"/create-account"} element={ <AccountPage /> } />
                     <Route path={"/otp-verification"} element={ <OtpPage /> } />
-                    <Route path={"/by-brand/:brandID"} element={ <ProductByBrandPage /> } />
-                    <Route path={"/by-category/:categoryID"} element={ <ProductByCategoryPage /> } />
+                    <Route path={"/by-brand/:id"} element={ <ProductByBrandPage /> } />
+                    <Route path={"/by-category/:id"} element={ <ProductByCategoryPage /> } />
                     <Route path={"/by-keyword/:keyword"} element={ <ProductByKeywordPage /> } />
                 </Routes>
             </BrowserRouter>

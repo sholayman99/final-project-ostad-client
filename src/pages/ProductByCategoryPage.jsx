@@ -1,10 +1,24 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+import productStore from "../store/productStore.js";
+import {useParams} from "react-router-dom";
+import Layout from "../components/layout/Layout.jsx";
+import ProductList from "../components/ProductList.jsx";
 
 const ProductByCategoryPage = () => {
-    return (
-        <div>
+    const {listByCategoryRequest} = productStore();
 
-        </div>
+    const {id} = useParams();
+
+    useEffect(() => {
+        (async()=>{
+            await listByCategoryRequest(id);
+        })()
+    }, [id]);
+
+    return (
+        <Layout>
+            <ProductList />
+        </Layout>
     );
 };
 

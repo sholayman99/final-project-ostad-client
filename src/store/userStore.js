@@ -1,10 +1,14 @@
 import {create} from "zustand";
 import axios from "axios";
-import {getEmail, setEmail} from "../utility/utility.js";
+import {getEmail, setEmail, unauthorized} from "../utility/utility.js";
 
 import Cookies from "js-cookie";
 
 const userStore =create((set)=>({
+
+    isLogin:()=>{
+        return !!Cookies.get("token");
+    },
 
     isFormSubmit:false,
 
@@ -41,7 +45,7 @@ const userStore =create((set)=>({
     createAccountRequest:async(postBody)=>{
         set({isFormSubmit:true})
         setEmail(postBody.email);
-        let res = await axios.post(`/createUser`,postBody);
+        let res = await axios.post(`/createUser`,postBody,{withCredentials:true});
         console.log(res)
         set({isFormSubmit:false})
         return res.data['status'] === 'success';
@@ -50,7 +54,7 @@ const userStore =create((set)=>({
     accountVerifyRequest:async(otp)=>{
         set({isFormSubmit:true})
         let email = getEmail();
-        let res = await axios.post(`/verifyUser/${email}/${otp}`);
+        let res = await axios.post(`/verifyUser/${email}/${otp}`,{withCredentials:true});
         set({isFormSubmit:false})
         return res.data['status'] === 'success';
     },
@@ -58,11 +62,30 @@ const userStore =create((set)=>({
     userLoginRequest:async(postBody)=>{
         set({isFormSubmit:true})
         let res = await axios.post(`/loginUser`,postBody,{withCredentials:true});
-        console.log(res);
         set({isFormSubmit:false})
         return res.data['status'] === 'success';
 
     },
+
+    userLogoutRequest:async()=>{
+        let res = await axios.get('/logout',{withCredentials:true});
+        return res.data['status'] === 'success'
+    },
+
+    userInfo:null,
+    userInfoRequest:async ()=>{
+       try {
+           let res = await axios.get(`/userInfo`,{withCredentials:true});
+           console.log(res.data['data'][0]);
+           if( res.data['status'] === 'success'){
+               set({userInfo:res.data['data'][0]});
+           }
+       }
+       catch (e) {
+         unauthorized(e.response.status);
+       }
+    }
+
 }));
 
 export default userStore;

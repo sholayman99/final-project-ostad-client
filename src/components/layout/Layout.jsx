@@ -3,6 +3,7 @@ import AppNavbar from "./AppNavbar.jsx";
 import {Toaster} from "react-hot-toast";
 import Footer from "./Footer.jsx";
 
+
 const Layout = ( {children}) => {
 
     return (
