@@ -2,7 +2,7 @@ import React from 'react';
 
 const CategorySkeleton = () => {
     return (
-        <section className={"p-10 flex flex-col items-center justify-center gap-10"}>
+        <section className={"lg:px-10 lg:pt-20 md:p-10 p-6 flex flex-col items-center justify-center gap-10"}>
             <div className={"text-center"}>
                 <h1 className={"lg:text-3xl md:text-2xl text-xl font-bold uppercase"}>Top Categories</h1>
                 <p className={"mt-2 lg:text-md md:text-sm text-xs text-gray-600"}>Explore a World of Choices Across Our

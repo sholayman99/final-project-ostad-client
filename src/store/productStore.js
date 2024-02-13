@@ -1,12 +1,12 @@
 import {create} from "zustand";
 import axios from "axios";
-const baseUrl = "http://localhost:5080/api/v1"
+
 
 const productStore =create((set)=>({
 
     sliderList:null,
     sliderListRequest:async()=>{
-        let res = await axios.get(`${baseUrl}/readSliders`);
+        let res = await axios.get(`/readSliders`);
 
         if(res.data['status']==='success'){
             set({sliderList:res.data['data']});
@@ -18,7 +18,7 @@ const productStore =create((set)=>({
 
     brandList:null,
     brandListRequest:async()=>{
-        let res = await axios.get(`${baseUrl}/productByBrand`);
+        let res = await axios.get(`/productByBrand`);
 
         if(res.data['status']==='success'){
             set({brandList:res.data['data']});
@@ -30,7 +30,7 @@ const productStore =create((set)=>({
 
     categoryList:null,
     categoryListRequest:async()=>{
-        let res = await axios.get(`${baseUrl}/productByCategory`);
+        let res = await axios.get(`/productByCategory`);
 
         if(res.data['status']==='success'){
             set({categoryList:res.data['data']});
@@ -39,6 +39,14 @@ const productStore =create((set)=>({
             set({categoryList:null});
         }
     },
+
+    productList:null,
+    productListRequest:async()=>{
+        let res = await axios.get(`/readProducts`);
+        if(res.data['status']==='success'){
+            set({productList:res.data['data']});
+        }
+    }
 
 
 }));

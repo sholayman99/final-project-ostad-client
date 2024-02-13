@@ -1,7 +1,7 @@
 import {create} from "zustand";
 import axios from "axios";
 import {getEmail, setEmail} from "../utility/utility.js";
-const baseUrl = "http://localhost:5080/api/v1";
+
 import Cookies from "js-cookie";
 
 const userStore =create((set)=>({
@@ -41,7 +41,7 @@ const userStore =create((set)=>({
     createAccountRequest:async(postBody)=>{
         set({isFormSubmit:true})
         setEmail(postBody.email);
-        let res = await axios.post(`${baseUrl}/createUser`,postBody);
+        let res = await axios.post(`/createUser`,postBody);
         console.log(res)
         set({isFormSubmit:false})
         return res.data['status'] === 'success';
@@ -50,14 +50,14 @@ const userStore =create((set)=>({
     accountVerifyRequest:async(otp)=>{
         set({isFormSubmit:true})
         let email = getEmail();
-        let res = await axios.post(`${baseUrl}/verifyUser/${email}/${otp}`);
+        let res = await axios.post(`/verifyUser/${email}/${otp}`);
         set({isFormSubmit:false})
         return res.data['status'] === 'success';
     },
 
     userLoginRequest:async(postBody)=>{
         set({isFormSubmit:true})
-        let res = await axios.post(`${baseUrl}/loginUser`,postBody);
+        let res = await axios.post(`/loginUser`,postBody,{withCredentials:true});
         console.log(res);
         set({isFormSubmit:false})
         return res.data['status'] === 'success';

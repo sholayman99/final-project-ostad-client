@@ -9,8 +9,10 @@ import ProductByCategoryPage from "./pages/ProductByCategoryPage.jsx";
 import ProductByKeywordPage from "./pages/ProductByKeywordPage.jsx";
 import AccountPage from "./pages/AccountPage.jsx";
 import OtpPage from "./pages/OtpPage.jsx";
+import axios from "axios";
 
 const App = () => {
+    axios.defaults.baseURL = 'http://localhost:9000/api/v1';
     return (
         <div className={"max-w-screen-2xl font-poppins mx-auto"}>
             <BrowserRouter>
