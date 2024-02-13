@@ -21,7 +21,7 @@ const AccountForm = () => {
        }
        else if(!validator.isMobile(accountFormValue.mobile) || validator.isNull(accountFormValue.mobile)){
           toast.error("Provide a valid Bangladeshi number")
-       } else if(accountFormValue.avatar === ""){
+       }else if(accountFormValue.avatar === ""){
            accountFormValue.avatar = 'https://i.ibb.co/7XLTDWv/user.png'
        }
        else{
@@ -31,7 +31,7 @@ const AccountForm = () => {
                navigate('/otp-verification');
            }
            else{
-               toast.error("Something went wrong!")
+               toast.error("Something went wrong!");
            }
        }
     }

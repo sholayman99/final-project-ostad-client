@@ -22,6 +22,8 @@ const LoginForm = () => {
             if(res === true){
                 toast.success("logged in successfully");
                 navigate('/');
+                loginFormValue.email="";
+                loginFormValue.password="";
             }
             else{
                 toast.error("Something went wrong!")

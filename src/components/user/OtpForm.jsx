@@ -19,6 +19,7 @@ const OtpForm = () => {
            if(res === true){
                toast.success("Verified successfully");
                navigate('/login');
+               otpFormValue.otp="";
            }
            else{
                toast.error("Something went wrong!")

@@ -37,7 +37,7 @@ const Slider = () => {
                         sliderList.map((item,i)=>{
                             return(
                                 <SwiperSlide key={i}>
-                                    <img src={item['img']} className={"md:h-[50vh] h-[30vh] lg:h-screen w-full"} alt={""} />
+                                    <img src={item['img']} className={"md:h-[50vh] mt-[77px] h-[30vh] lg:h-screen w-full"} alt={""} />
                                 </SwiperSlide>
                             )
                         })

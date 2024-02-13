@@ -2,6 +2,7 @@ import React from 'react';
 import {Link, NavLink} from "react-router-dom";
 import logo from "../../assets/images/logo.png"
 
+
 const AppNavbar = () => {
 
     const navList =(
@@ -14,17 +15,18 @@ const AppNavbar = () => {
                 <NavLink className={({isActive}) => isActive ? "font-semibold underline " +
                     "text-lg" : "text-lg font-semibold"} to={"/products"}>Products</NavLink>
             </li>
-            <li>
-                <NavLink className={({isActive}) => isActive ? "font-semibold underline " +
-                    "text-lg" : "text-lg font-semibold"} to={"/login"}>Login</NavLink>
-            </li>
+             <li>
+                 <NavLink className={({isActive}) => isActive ? "font-semibold underline " +
+                  "text-lg" : "text-lg font-semibold"} to={"/login"}>Login</NavLink>
+             </li>
         </>
     )
+
 
     return (
         <div className="navbar shadow-2xl px-5 py-3 fixed top-0 right-0 z-50 max-w-screen-2xl bg-base-100">
             <div className="navbar-start">
-                <div className="dropdown">
+            <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24"
                              stroke="currentColor">
@@ -47,12 +49,12 @@ const AppNavbar = () => {
                     {navList}
                 </ul>
             </div>
-            <div tabIndex={0} role="button" className="btn btn-ghost  lg:mt-2 btn-circle avatar">
-                <div className="w-10 rounded-full">
-                    <img alt="Tailwind CSS Navbar component"
-                         src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"/>
-                </div>
-            </div>
+           <div tabIndex={0} role="button" className="btn btn-ghost  lg:mt-2 btn-circle avatar">
+                        <div className="w-10 rounded-full">
+                            <img alt="Tailwind CSS Navbar component" src={""}/>
+                        </div>
+
+           </div>
         </div>
     );
 };
