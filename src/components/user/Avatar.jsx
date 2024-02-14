@@ -1,6 +1,5 @@
 import React from 'react';
 import userStore from "../../store/userStore.js";
-import AvatarSkeleton from "../../skeleton/Avatar-Skeleton.jsx";
 import {Link} from "react-router-dom";
 import {motion} from "framer-motion";
 
@@ -10,9 +9,10 @@ const Avatar = () => {
 
     if(userInfo === null) {
         return <Link to={"/profile"} className="avatar">
-            <div className="w-12">
+            <motion.div whileHover={{scale: 1.1}} whileTap={{scale: 0.9}}
+                        transition={{type: "spring", stiffness: 400, damping: 17}} className="w-12 rounded-full">
                 <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" alt={""}/>
-            </div>
+            </motion.div>
             </Link>
     } else {
         return (

@@ -94,6 +94,18 @@ const productStore =create((set)=>({
         }
     },
 
+    listByFilterRequest:async(postBody)=>{
+        try {
+            let res = await axios.post('/productListByFilter',postBody,{withCredentials:true});
+            if(res.data['status']==='success'){
+                set({listProduct:res.data['data']});
+            }
+        }
+        catch (e) {
+            unauthorized(e.response.status)
+        }
+    }
+
 
 
 

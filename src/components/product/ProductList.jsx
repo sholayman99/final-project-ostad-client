@@ -1,32 +1,42 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import productStore from "../../store/productStore.js";
 import {motion} from "framer-motion";
 import FeaturedSkeleton from "../../skeleton/FeaturedSkeleton.jsx";
-import {FaSearch} from "react-icons/fa";
+
 
 const ProductList = () => {
+    const [filter , setFilter] = useState({brandID:"",categoryID:""})
+    const {listProduct,brandListRequest,categoryListRequest, brandList,categoryList,
+        listByFilterRequest} = productStore();
 
-    const {listProduct,allProductListRequest,listByBrandRequest,brandListRequest,categoryListRequest,
-        listByCategoryRequest,listByKeywordRequest,brandList,categoryList} = productStore();
+    const inputOnchange = (key,value)=>{
+        setFilter((data)=>({
+            ...data,
+            [key]:value
+        }))
+    }
 
     useEffect(() => {
         (async ()=>{
-            brandList === null ?await brandListRequest():null
-            categoryList === null?await categoryListRequest():null
+            brandList === null ?await brandListRequest():null;
+            categoryList === null?await categoryListRequest():null;
+            let isEveryPropertyEmpty = Object.values(filter).every(value=> value === "");
+            !isEveryPropertyEmpty ? await listByFilterRequest(filter):null ;
         })()
-    }, []);
+    }, [filter]);
 
     return (
         <section className={"flex justify-center items-center flex-col gap-14 mt-28 lg:px-10 lg:pt-20 md:p-10 p-5"}>
 
             <div className={"grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-10 w-full "}>
-                <select className="select select-primary  w-full max-w-xs">
+                <select value={filter.brandID} className="select select-primary  w-full max-w-xs"
+                        onChange={(e)=>inputOnchange("brandID",e.target.value)}>
                     <option disabled selected> Select Brand</option>
                     {
                         brandList !== null ? (
                             brandList.map((item, i) => {
                                 return (
-                                    <option key={i}>{item['brandName']}</option>
+                                    <option value={item['_id']} key={i}>{item['brandName']}</option>
                                 )
                             })
                         ) : (
@@ -35,13 +45,14 @@ const ProductList = () => {
                     }
                 </select>
 
-                <select className="select select-primary  w-full max-w-xs">
+                <select value={filter.categoryID} className="select select-primary  w-full max-w-xs"
+                        onChange={(e)=>inputOnchange("categoryID",e.target.value)}>
                     <option disabled selected>Select Category</option>
                     {
                         categoryList !== null ? (
                             categoryList.map((item, i) => {
                                 return (
-                                    <option key={i}>{item['categoryName']}</option>
+                                    <option key={i} value={item['_id']}>{item['categoryName']}</option>
                                 )
                             })
                         ) : (
