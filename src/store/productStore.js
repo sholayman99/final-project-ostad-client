@@ -22,6 +22,7 @@ const productStore =create((set)=>({
         }))
     },
 
+
     addProductRequest:async(postBody)=>{
        try {
            set({isProductSubmit:true})
@@ -31,6 +32,40 @@ const productStore =create((set)=>({
        }
        catch (e) {
            unauthorized(e.response.status);
+       }
+    },
+
+    updateProductRequest:async (postBody,id)=>{
+       try {
+           let res = await axios.post(`/updateProduct/${id}`,postBody,{withCredentials:true});
+           return res.data['status'] === 'success';
+       }
+       catch (e) {
+           unauthorized(e.response.status)
+       }
+    },
+
+    removeProductRequest:async (id)=>{
+       try {
+           let res = await axios.delete(`/removeProduct/${id}`,{withCredentials:true});
+           return res.data['status'] === 'success';
+       }
+       catch (e) {
+           unauthorized(e.response.status);
+       }
+    },
+
+    singleProduct:null,
+    singleProductRequest:async(id)=>{
+       try {
+           set({singleProduct:null})
+           let res = await axios.get(`/readSingleProduct/${id}`,{withCredentials:true});
+           if(res.data['status']==='success'){
+               set({singleProduct:res.data['data']})
+           }
+       }
+       catch (e) {
+           unauthorized(e.response.status) ;
        }
     },
 

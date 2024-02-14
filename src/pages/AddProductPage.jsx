@@ -1,11 +1,11 @@
 import React from 'react';
 import Layout from "../components/layout/Layout.jsx";
-import AddForm from "../components/product/AddForm.jsx";
+import SaveForm from "../components/product/SaveForm.jsx";
 
 const AddProductPage = () => {
     return (
         <Layout>
-            <AddForm />
+            <SaveForm />
         </Layout>
     );
 };

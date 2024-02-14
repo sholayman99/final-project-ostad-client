@@ -3,29 +3,20 @@ import productStore from "../../store/productStore.js";
 import ProductSubmitBtn from "./ProductSubmitBtn.jsx";
 import toast from "react-hot-toast";
 
-const AddForm = () => {
+const SaveForm = () => {
 
     const {addProductRequest,addFormValue,addFormOnChange,brandList,
         brandListRequest,categoryList,categoryListRequest} = productStore();
 
     const handleSubmit = async ()=>{
-
+         console.log(addFormValue)
          let res = await addProductRequest(addFormValue);
          if(res){
              toast.success("Added successfully");
-             addFormValue.productName="";
-             addFormValue.image="";
-             addFormValue.brandID="";
-             addFormValue.categoryID="";
-             addFormValue.des="";
+             addFormValue.image= "";
          }
          else{
              toast.error("Something went wrong!");
-             addFormValue.productName="";
-             addFormValue.image="";
-             addFormValue.brandID="";
-             addFormValue.categoryID="";
-             addFormValue.des="";
          }
     }
 
@@ -49,18 +40,18 @@ const AddForm = () => {
                             <label className="label">
                                 <span className="label-text">Product Name</span>
                             </label>
-                            <input type="email" placeholder="XYZ 420..." value={addFormValue.productName}
+                            <input type="text" placeholder="XYZ 420..." value={addFormValue.productName}
                                    className="input input-bordered input-primary"
-                                   onFocus={(e) => addFormOnChange("productName", e.target.value)}
+                                   onChange={(e) => addFormOnChange("productName", e.target.value)}
                                    required/>
                         </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Image Url</span>
                             </label>
-                            <input type="email" placeholder="https://abc" value={addFormValue.image}
+                            <input type="text" placeholder="https://abc" value={addFormValue.image}
                                    className="input input-bordered input-primary"
-                                   onFocus={(e) => addFormOnChange("image", e.target.value)}
+                                   onChange={(e) => addFormOnChange("image", e.target.value)}
                                    required/>
                         </div>
                         <div className="form-control">
@@ -68,7 +59,7 @@ const AddForm = () => {
                                 <span className="label-text">Brand</span>
                             </label>
                             <select value={addFormValue.brandID} className="select select-primary  w-full max-w-xs"
-                                    onFocus={(e) => addFormOnChange("brandID", e.target.value)}>
+                                    onChange={(e) => addFormOnChange("brandID", e.target.value)}>
                                 <option disabled selected> Select Brand</option>
                                 {
                                     brandList !== null ? (
@@ -88,7 +79,7 @@ const AddForm = () => {
                                 <span className="label-text">Category</span>
                             </label>
                             <select value={addFormValue.categoryID} className="select select-primary  w-full max-w-xs"
-                                    onFocus={(e) => addFormOnChange("categoryID", e.target.value)}>
+                                    onChange={(e) => addFormOnChange("categoryID", e.target.value)}>
                                 <option disabled selected>Select Category</option>
                                 {
                                     categoryList !== null ? (
@@ -108,7 +99,7 @@ const AddForm = () => {
                                 <span className="label-text">Description</span>
                             </label>
                             <textarea className="textarea textarea-primary" value={addFormValue.des}
-                                      onFocus={(e) => addFormOnChange("des", e.target.value)}
+                                      onChange={(e) => addFormOnChange("des", e.target.value)}
                                       placeholder="lorem ipsum......."></textarea>
                         </div>
 
@@ -124,4 +115,4 @@ const AddForm = () => {
     );
 };
 
-export default AddForm;
+export default SaveForm;

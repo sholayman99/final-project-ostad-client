@@ -13,6 +13,7 @@ export default {
         mytheme: {
           "primary": "#000000",
           "base-100": "#ffffff",
+          "error": "#dc2626"
         },
       },
     ],

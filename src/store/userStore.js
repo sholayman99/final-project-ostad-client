@@ -77,8 +77,9 @@ const userStore =create((set)=>({
     userInfo:null,
     userInfoRequest:async ()=>{
        try {
-           set({isLoading:true})
+
            let res = await axios.get(`/userInfo`,{withCredentials:true});
+           set({isLoading:true})
            if( res.data['status'] === 'success'){
                set({userInfo:res.data['data'][0]},);
            }
