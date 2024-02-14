@@ -1,7 +1,8 @@
 import React, {useEffect} from 'react';
 import Layout from "../components/layout/Layout.jsx";
 import productStore from "../store/productStore.js";
-import ProductList from "../components/ProductList.jsx";
+import ProductList from "../components/product/ProductList.jsx";
+
 
 const ProductPage = () => {
 

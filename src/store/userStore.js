@@ -12,6 +12,8 @@ const userStore =create((set)=>({
 
     isFormSubmit:false,
 
+    isLoading:false,
+
     accountFormValue:{name:"",email:"",password:"",mobile:"",avatar:""},
     accountFormOnChange:(name,value)=>{
         set((state)=>({
@@ -46,7 +48,6 @@ const userStore =create((set)=>({
         set({isFormSubmit:true})
         setEmail(postBody.email);
         let res = await axios.post(`/createUser`,postBody,{withCredentials:true});
-        console.log(res)
         set({isFormSubmit:false})
         return res.data['status'] === 'success';
     },
@@ -69,17 +70,19 @@ const userStore =create((set)=>({
 
     userLogoutRequest:async()=>{
         let res = await axios.get('/logout',{withCredentials:true});
-        return res.data['status'] === 'success'
+        return res.data['status'] === 'success';
+
     },
 
     userInfo:null,
     userInfoRequest:async ()=>{
        try {
+           set({isLoading:true})
            let res = await axios.get(`/userInfo`,{withCredentials:true});
-           console.log(res.data['data'][0]);
            if( res.data['status'] === 'success'){
-               set({userInfo:res.data['data'][0]});
+               set({userInfo:res.data['data'][0]},);
            }
+           set({isLoading:false})
        }
        catch (e) {
          unauthorized(e.response.status);

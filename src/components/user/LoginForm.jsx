@@ -1,15 +1,14 @@
-import React from 'react';
-import userStore from "../../store/userStore.js";
+import React, {useState} from 'react';
 import login from "../../assets/images/login.jpg"
 import SubmitButton from "./SubmitButton.jsx";
 import {Link, useNavigate} from "react-router-dom";
 import validator from "../../utility/validator.js";
 import toast from "react-hot-toast";
+import userStore from "../../store/userStore.js";
 
 const LoginForm = () => {
     const navigate = useNavigate();
-    const {loginFormValue,loginValueOnChange,userLoginRequest} = userStore();
-    const {userInfoRequest} = userStore();
+    const {loginFormValue,loginValueOnChange,userLoginRequest,} = userStore();
 
     const handleSubmit = async()=>{
         if(!validator.isEmail(loginFormValue.email) || validator.isNull(loginFormValue.email)){
@@ -20,8 +19,6 @@ const LoginForm = () => {
         }
         else{
             let res = await userLoginRequest(loginFormValue);
-            await userInfoRequest();
-
             if(res === true){
                 toast.success("logged in successfully");
                 navigate('/');
