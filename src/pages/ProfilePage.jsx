@@ -1,15 +1,42 @@
-import React, {useEffect} from 'react';
+// eslint-disable-next-line no-unused-vars
+import React, {useState} from 'react';
 import Layout from "../components/layout/Layout.jsx";
 import userStore from "../store/userStore.js";
 import Avatar from "../components/user/Avatar.jsx";
+import SubmitButton from "../components/user/SubmitButton.jsx";
+import toast from "react-hot-toast";
+import validator from "../utility/validator.js";
+import {FaEye, FaEyeSlash} from "react-icons/fa";
 
 const ProfilePage = () => {
-   const {userInfoRequest} = userStore();
-    useEffect(() => {
-        (async()=>{
-           await userInfoRequest();
-        })()
-    }, []);
+    const [passwordType, setPasswordType] = useState("password");
+  const {passFormValue,passFormOnChange,updatePassRequest} = userStore();
+
+
+  const handlePass = async()=>{
+      if(validator.isPassword(passFormValue.password) && !validator.isNull(passFormValue.password)){
+          let res = await updatePassRequest(passFormValue);
+          if(res){
+              toast.success("Password changed successfully");
+              passFormValue.password = ""
+          }
+          else{
+              toast.error('Something went wrong!')
+          }
+      }
+      else{
+          toast.error("Min length 8,one num,one letter and one special character")
+      }
+  }
+
+    const togglePassword =()=>{
+        if(passwordType==="password")
+        {
+            setPasswordType("text")
+            return;
+        }
+        setPasswordType("password")
+    }
 
     return (
         <Layout>
@@ -22,7 +49,7 @@ const ProfilePage = () => {
                         </div>
                         <input type="text" placeholder="Image url" className="input input-bordered w-full max-w-xs"/>
                     </label>
-                    <button className={"btn btn-primary"}>Update</button>
+                    <SubmitButton onClick={handlePass} text={"Update"} />
 
                 </div>
                 <div>
@@ -34,9 +61,16 @@ const ProfilePage = () => {
                                   d="M14 6a4 4 0 0 1-4.899 3.899l-1.955 1.955a.5.5 0 0 1-.353.146H5v1.5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-2.293a.5.5 0 0 1 .146-.353l3.955-3.955A4 4 0 1 1 14 6Zm-4-2a.75.75 0 0 0 0 1.5.5.5 0 0 1 .5.5.75.75 0 0 0 1.5 0 2 2 0 0 0-2-2Z"
                                   clipRule="evenodd"/>
                         </svg>
-                        <input type="text" className="grow" placeholder={"New pass"}/>
+                        <input type={passwordType} className="grow" placeholder={"New password"} value={passFormValue.password}
+                               onChange={(e) => passFormOnChange("password", e.target.value)}/>
+                        <div className="input-group-btn">
+                            <button className="btn bg-base-100 border-none p-1" onClick={togglePassword}>
+                                {passwordType === "password" ? <FaEyeSlash /> :
+                                    <FaEye />}
+                            </button>
+                        </div>
                     </label>
-                    <button className={"btn btn-primary"}>Change</button>
+                    <SubmitButton onClick={handlePass} text={"Change"}/>
                 </div>
             </section>
 

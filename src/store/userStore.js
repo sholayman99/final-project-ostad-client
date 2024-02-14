@@ -34,6 +34,16 @@ const userStore =create((set)=>({
         }))
     },
 
+    passFormValue:{password:""},
+    passFormOnChange:(name,value)=>{
+        set((state)=>({
+            passFormValue:{
+                ...state.passFormValue,
+                [name]:value
+            }
+        }))
+    },
+
     loginFormValue:{email: "", password: ""},
     loginValueOnChange:(name,value)=>{
         set((state)=>({
@@ -87,6 +97,18 @@ const userStore =create((set)=>({
        }
        catch (e) {
          unauthorized(e.response.status);
+       }
+    },
+
+    updatePassRequest:async(postBody)=>{
+       try {
+           set({isFormSubmit:true})
+           let res = await axios.post('/updatePassword' , postBody,{withCredentials:true});
+           set({isFormSubmit:false});
+           return res.data['status'] === 'success';
+       }
+       catch (e) {
+           unauthorized(e.response.status);
        }
     }
 
