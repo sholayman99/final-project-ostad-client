@@ -53,7 +53,7 @@ const LoginForm = () => {
                                 </label>
                                 <input type="email" placeholder="Your email" value={loginFormValue.email}
                                        className="input input-bordered input-primary"
-                                       onChange={(e) => loginValueOnChange("email", e.target.value)}
+                                       onFocus={(e) => loginValueOnChange("email", e.target.value)}
                                        required/>
                             </div>
                             <div className="form-control">
@@ -62,7 +62,7 @@ const LoginForm = () => {
                                 </label>
                                 <input type="text" placeholder="Your password" value={loginFormValue.password}
                                        className="input input-bordered input-primary"
-                                       onChange={(e) => loginValueOnChange("password", e.target.value)}
+                                       onFocus={(e) => loginValueOnChange("password", e.target.value)}
                                        required/>
                             </div>
 

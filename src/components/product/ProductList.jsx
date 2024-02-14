@@ -2,9 +2,11 @@ import React, {useEffect, useState} from 'react';
 import productStore from "../../store/productStore.js";
 import {motion} from "framer-motion";
 import FeaturedSkeleton from "../../skeleton/FeaturedSkeleton.jsx";
+import {useNavigate} from "react-router-dom";
 
 
 const ProductList = () => {
+    const navigate = useNavigate();
     const [filter , setFilter] = useState({brandID:"",categoryID:""})
     const {listProduct,brandListRequest,categoryListRequest, brandList,categoryList,
         listByFilterRequest} = productStore();
@@ -14,6 +16,10 @@ const ProductList = () => {
             ...data,
             [key]:value
         }))
+    }
+
+    const handleAdd = () =>{
+        navigate('/add-product')
     }
 
     useEffect(() => {
@@ -60,6 +66,13 @@ const ProductList = () => {
                         )
                     }
                 </select>
+
+                <motion.button className={"btn border border-primary bg-base-100 hover:border-primary shadow-2xl max-w-xs"}
+                               whileHover={{scale: 1.05}} whileTap={{scale: 0.9}}
+                               transition={{type: "spring", stiffness: 400, damping: 17}}
+                               onClick={handleAdd}>
+                    Add a new Product
+                </motion.button>
 
 
 

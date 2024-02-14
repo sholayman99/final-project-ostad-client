@@ -12,6 +12,7 @@ import OtpPage from "./pages/OtpPage.jsx";
 import axios from "axios";
 import ProfilePage from "./pages/ProfilePage.jsx";
 import userStore from "./store/userStore.js";
+import AddProductPage from "./pages/AddProductPage.jsx";
 
 const App = () => {
 
@@ -42,6 +43,7 @@ const App = () => {
                     <Route path={"/by-category/:id"} element={ <ProductByCategoryPage /> } />
                     <Route path={"/by-keyword/:keyword"} element={ <ProductByKeywordPage /> } />
                     <Route path={"/profile"} element={ <ProfilePage /> } />
+                    <Route path={"/add-product"} element={<AddProductPage />} />
                 </Routes>
             </BrowserRouter>
         </div>

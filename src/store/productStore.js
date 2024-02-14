@@ -10,6 +10,30 @@ const productStore =create((set)=>({
         set({searchKeyword:keyword})
     },
 
+    isProductSubmit:false,
+
+    addFormValue:{productName:"",image:"",des:"",brandID:"",categoryID:""},
+    addFormOnChange:(name,value)=>{
+        set((state)=>({
+            addFormValue:{
+                ...state.addFormValue,
+                [name]:value
+            }
+        }))
+    },
+
+    addProductRequest:async(postBody)=>{
+       try {
+           set({isProductSubmit:true})
+           let res = await axios.post(`/createProduct`,postBody,{withCredentials:true});
+           set({isProductSubmit:false})
+           return res.data['status'] === 'success';
+       }
+       catch (e) {
+           unauthorized(e.response.status);
+       }
+    },
+
     sliderList:null,
     sliderListRequest:async()=>{
         let res = await axios.get(`/readSliders`,{withCredentials:true});

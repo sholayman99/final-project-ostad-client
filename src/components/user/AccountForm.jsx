@@ -62,7 +62,7 @@ const AccountForm = () => {
                                 </label>
                                 <input type="email" placeholder="Your full name" value={accountFormValue.name}
                                        className="input input-bordered input-primary"
-                                       onChange={(e) => accountFormOnChange("name", e.target.value)}
+                                       onFocus={(e) => accountFormOnChange("name", e.target.value)}
                                        required/>
                             </div>
                             <div className="form-control">
@@ -71,7 +71,7 @@ const AccountForm = () => {
                                 </label>
                                 <input type="email" placeholder="Your email" value={accountFormValue.email}
                                        className="input input-bordered input-primary"
-                                       onChange={(e) => accountFormOnChange("email", e.target.value)}
+                                       onFocus={(e) => accountFormOnChange("email", e.target.value)}
                                        required/>
                             </div>
                             <div className="form-control">
@@ -80,7 +80,7 @@ const AccountForm = () => {
                                 </label>
                                 <input type="text" placeholder="Your password" value={accountFormValue.password}
                                        className="input input-bordered input-primary"
-                                       onChange={(e) => accountFormOnChange("password", e.target.value)}
+                                       onFocus={(e) => accountFormOnChange("password", e.target.value)}
                                        required/>
                             </div>
                             <div className="form-control">
@@ -89,7 +89,7 @@ const AccountForm = () => {
                                 </label>
                                 <input type="text" placeholder="Your mobile num" value={accountFormValue.mobile}
                                        className="input input-bordered input-primary"
-                                       onChange={(e) => accountFormOnChange("mobile", e.target.value)}
+                                       onFocus={(e) => accountFormOnChange("mobile", e.target.value)}
                                        required/>
                             </div>
                             <div className="form-control">
@@ -98,7 +98,7 @@ const AccountForm = () => {
                                 </label>
                                 <input type="text" placeholder="Your avatar link" value={accountFormValue.avatar}
                                        className="input input-bordered input-primary"
-                                       onChange={(e) => accountFormOnChange("avatar", e.target.value)} />
+                                       onFocus={(e) => accountFormOnChange("avatar", e.target.value)} />
                             </div>
 
                         </div>
