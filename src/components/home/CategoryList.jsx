@@ -25,7 +25,7 @@ const CategoryList = () => {
                             return (
                                 <motion.div className={"p-0"} key={i} whileHover={{scale: 1.1}} whileTap={{scale: 0.9}}
                                             transition={{type: "spring", stiffness: 400, damping: 17}}>
-                                    <Link to={`/by-brand/${item['_id']}`} className="card shadow-2xl">
+                                    <Link to={`/by-category/${item['_id']}`} className="card shadow-2xl">
                                         <figure className="px-10 pt-5">
                                             <img src={item['img']} alt="Shoes" className="rounded-xl"/>
                                         </figure>

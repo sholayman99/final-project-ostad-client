@@ -6,11 +6,14 @@ import toast from "react-hot-toast";
 import Cookies from "js-cookie";
 import {motion} from "framer-motion";
 import Avatar from "../user/Avatar.jsx";
+import {FaSearch} from "react-icons/fa";
+import productStore from "../../store/productStore.js";
 
 
 const AppNavbar = () => {
     const navigate = useNavigate();
     const {isLogin,userLogoutRequest} = userStore();
+    const {searchKeyword,setSearchKeyword} = productStore();
 
     const handleLogout=async ()=>{
         let res = await userLogoutRequest();
@@ -25,6 +28,18 @@ const AppNavbar = () => {
 
     const handleLogin = async()=>{
         navigate('/login')
+    }
+
+    const handleKeyword=()=>{
+
+        console.log(searchKeyword)
+
+           if(searchKeyword.length>0){
+               navigate(`/by-keyword/${searchKeyword}`);
+           }
+           else{
+               navigate('/');
+           }
     }
 
 
@@ -82,6 +97,14 @@ const AppNavbar = () => {
                     <img src={logo} alt={""} className={"lg:w-32 w-24 mb-2 lg:mb-0 md:w-28 "}/>
                 </Link>
             </div>
+            <label className="input navbar-center input-bordered input-primary max-w-xs w-full relative">
+                <input onChange={(e)=>setSearchKeyword(e.target.value)} type="text" className="grow absolute right-2 top-3 " placeholder="Search by name"/>
+                <motion.button onClick={handleKeyword}
+                    whileHover={{scale: 1.03}} whileTap={{scale: 0.9}} transition={{type: "spring", stiffness: 400, damping: 17}}
+                    className={"absolute bg-primary px-4 py-3 right-1 rounded-md text-gray-500"}>
+                    <FaSearch/>
+                </motion.button>
+            </label>
 
             <div className="navbar-end hidden lg:flex items-start justify-end gap-4">
                 <ul className="menu menu-horizontal">
@@ -89,10 +112,10 @@ const AppNavbar = () => {
                 </ul>
             </div>
             {
-                isLogin()?(
-                    <Avatar />
-                ):(
-                    <div> </div>
+                isLogin() ? (
+                    <Avatar/>
+                ) : (
+                    <div></div>
                 )
             }
         </div>
