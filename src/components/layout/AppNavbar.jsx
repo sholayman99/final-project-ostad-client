@@ -32,8 +32,6 @@ const AppNavbar = () => {
 
     const handleKeyword=()=>{
 
-        console.log(searchKeyword)
-
            if(searchKeyword.length>0){
                navigate(`/by-keyword/${searchKeyword}`);
            }
@@ -46,16 +44,30 @@ const AppNavbar = () => {
     const navList =(
         <>
             <li>
-                <NavLink className={({isActive}) => isActive ? "font-semibold underline " +
-                    "text-lg mt-3 lg:mt-0 lg:mr-5" : "text-lg font-semibold  mt-3 lg:mt-0 lg:mr-5"} to={"/"}>Home</NavLink>
+                <div className="input input-bordered max-w-64 lg:max-w-sm w-full flex items-center gap-2">
+                    <input type="text" className="grow h-full " placeholder="Search name"
+                           onChange={(e)=>setSearchKeyword(e.target.value)}/>
+                    <motion.button onClick={handleKeyword}
+                                   whileHover={{scale: 1.03}} whileTap={{scale: 0.9}}
+                                   transition={{type: "spring", stiffness: 400, damping: 17}}
+                                   className={"absolute bg-primary px-4 py-3 lg:right-1 right-5 rounded-md text-gray-500"}>
+                        <FaSearch/>
+                    </motion.button>
+                </div>
             </li>
             <li>
                 <NavLink className={({isActive}) => isActive ? "font-semibold underline " +
-                    "text-lg lg:mr-5  mt-3 lg:mt-0" : "text-lg font-semibold lg:mr-5  mt-3 lg:mt-0"} to={"/products"}>Products</NavLink>
+                    "text-lg mt-3 lg:mt-0 lg:mx-5" : "text-lg font-semibold  mt-3 lg:mt-0 lg:mx-5"}
+                         to={"/"}>Home</NavLink>
+            </li>
+            <li>
+                <NavLink className={({isActive}) => isActive ? "font-semibold underline " +
+                    "text-lg lg:mr-5  mt-3 lg:mt-0" : "text-lg font-semibold lg:mr-5  mt-3 lg:mt-0"}
+                         to={"/products"}>Products</NavLink>
             </li>
             {
-                isLogin()?(<li>
-                    <motion.button  whileHover={{scale: 1.05}} whileTap={{scale: 0.9}}
+                isLogin() ? (<li>
+                        <motion.button whileHover={{scale: 1.05}} whileTap={{scale: 0.9}}
                                     transition={{type: "spring", stiffness: 400, damping: 17}}
                         onClick={handleLogout}
                         className={"text-lg bg-base-100 max-w-[100px] border border-primary font-semibold rounded-xl " +
@@ -97,16 +109,8 @@ const AppNavbar = () => {
                     <img src={logo} alt={""} className={"lg:w-32 w-24 mb-2 lg:mb-0 md:w-28 "}/>
                 </Link>
             </div>
-            <label className="input navbar-center input-bordered input-primary max-w-xs w-full relative">
-                <input onChange={(e)=>setSearchKeyword(e.target.value)} type="text" className="grow absolute right-2 top-3 " placeholder="Search by name"/>
-                <motion.button onClick={handleKeyword}
-                    whileHover={{scale: 1.03}} whileTap={{scale: 0.9}} transition={{type: "spring", stiffness: 400, damping: 17}}
-                    className={"absolute bg-primary px-4 py-3 right-1 rounded-md text-gray-500"}>
-                    <FaSearch/>
-                </motion.button>
-            </label>
 
-            <div className="navbar-end hidden lg:flex items-start justify-end gap-4">
+            <div className="navbar-center hidden lg:flex items-start justify-end gap-4">
                 <ul className="menu menu-horizontal">
                     {navList}
                 </ul>
