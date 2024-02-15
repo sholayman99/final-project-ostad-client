@@ -1,15 +1,17 @@
-import React from 'react';
+import React, {useState} from 'react';
 import signup from "../../assets/images/signup.jpg"
 import {Link, useNavigate} from "react-router-dom";
 import userStore from "../../store/userStore.js";
 import SubmitButton from "./SubmitButton.jsx";
 import validator from "../../utility/validator.js";
 import toast from "react-hot-toast";
+import {FaEye, FaEyeSlash} from "react-icons/fa";
 
 
 const AccountForm = () => {
     const navigate = useNavigate();
     const {accountFormValue,accountFormOnChange,createAccountRequest} = userStore();
+    const [passwordType, setPasswordType] = useState("password");
 
 
     const handleSubmit = async()=>{
@@ -37,6 +39,14 @@ const AccountForm = () => {
        }
     }
 
+    const togglePassword =()=>{
+        if(passwordType==="password")
+        {
+            setPasswordType("text")
+            return;
+        }
+        setPasswordType("password")
+    }
 
     return (
         <section className={"lg:min-h-screen my-20 lg:my-5 md:my-0 min-h-[80vh] flex items-center px-5 justify-center"}>
@@ -62,7 +72,7 @@ const AccountForm = () => {
                                 </label>
                                 <input type="email" placeholder="Your full name" value={accountFormValue.name}
                                        className="input input-bordered input-primary"
-                                       onFocus={(e) => accountFormOnChange("name", e.target.value)}
+                                       onChange={(e) => accountFormOnChange("name", e.target.value)}
                                        required/>
                             </div>
                             <div className="form-control">
@@ -71,17 +81,24 @@ const AccountForm = () => {
                                 </label>
                                 <input type="email" placeholder="Your email" value={accountFormValue.email}
                                        className="input input-bordered input-primary"
-                                       onFocus={(e) => accountFormOnChange("email", e.target.value)}
+                                       onChange={(e) => accountFormOnChange("email", e.target.value)}
                                        required/>
                             </div>
-                            <div className="form-control">
+                            <div className="form-control relative">
                                 <label className="label">
                                     <span className="label-text">Password</span>
                                 </label>
-                                <input type="text" placeholder="Your password" value={accountFormValue.password}
+                                <input type={passwordType} placeholder="Your password" value={accountFormValue.password}
                                        className="input input-bordered input-primary"
-                                       onFocus={(e) => accountFormOnChange("password", e.target.value)}
+                                       onChange={(e) => accountFormOnChange("password", e.target.value)}
                                        required/>
+                                <div className="input-group-btn absolute right-2 top-11">
+                                    <button className="btn bg-base-100 hover:bg-base-100 border-none btn-sm"
+                                            onClick={togglePassword}>
+                                        {passwordType === "password" ? <FaEyeSlash/> :
+                                            <FaEye/>}
+                                    </button>
+                                </div>
                             </div>
                             <div className="form-control">
                                 <label className="label">
@@ -89,7 +106,7 @@ const AccountForm = () => {
                                 </label>
                                 <input type="text" placeholder="Your mobile num" value={accountFormValue.mobile}
                                        className="input input-bordered input-primary"
-                                       onFocus={(e) => accountFormOnChange("mobile", e.target.value)}
+                                       onChange={(e) => accountFormOnChange("mobile", e.target.value)}
                                        required/>
                             </div>
                             <div className="form-control">
@@ -98,7 +115,7 @@ const AccountForm = () => {
                                 </label>
                                 <input type="text" placeholder="Your avatar link" value={accountFormValue.avatar}
                                        className="input input-bordered input-primary"
-                                       onFocus={(e) => accountFormOnChange("avatar", e.target.value)} />
+                                       onChange={(e) => accountFormOnChange("avatar", e.target.value)} />
                             </div>
 
                         </div>

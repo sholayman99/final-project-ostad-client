@@ -5,9 +5,11 @@ import {Link, useNavigate} from "react-router-dom";
 import validator from "../../utility/validator.js";
 import toast from "react-hot-toast";
 import userStore from "../../store/userStore.js";
+import {FaEye, FaEyeSlash} from "react-icons/fa";
 
 const LoginForm = () => {
     const navigate = useNavigate();
+    const [passwordType, setPasswordType] = useState("password");
     const {loginFormValue,loginValueOnChange,userLoginRequest,} = userStore();
 
     const handleSubmit = async()=>{
@@ -29,6 +31,15 @@ const LoginForm = () => {
                 toast.error("Something went wrong!")
             }
         }
+    }
+
+    const togglePassword =()=>{
+        if(passwordType==="password")
+        {
+            setPasswordType("text")
+            return;
+        }
+        setPasswordType("password")
     }
 
     return (
@@ -53,18 +64,25 @@ const LoginForm = () => {
                                 </label>
                                 <input type="email" placeholder="Your email" value={loginFormValue.email}
                                        className="input input-bordered input-primary"
-                                       onFocus={(e) => loginValueOnChange("email", e.target.value)}
+                                       onChange={(e) => loginValueOnChange("email", e.target.value)}
                                        required/>
                             </div>
-                            <div className="form-control">
-                                <label className="label">
-                                    <span className="label-text">Password</span>
-                                </label>
-                                <input type="text" placeholder="Your password" value={loginFormValue.password}
-                                       className="input input-bordered input-primary"
-                                       onFocus={(e) => loginValueOnChange("password", e.target.value)}
-                                       required/>
+                        <div className="form-control  relative">
+                            <label className="label">
+                                <span className="label-text">Password</span>
+                            </label>
+                            <input type={passwordType} placeholder="Your password" value={loginFormValue.password}
+                                   className="input input-bordered input-primary"
+                                   onChange={(e) => loginValueOnChange("password", e.target.value)}
+                                   required/>
+                            <div className="input-group-btn absolute right-2 top-11">
+                                <button className="btn bg-base-100 hover:bg-base-100 border-none btn-sm"
+                                        onClick={togglePassword}>
+                                    {passwordType === "password" ? <FaEyeSlash/> :
+                                        <FaEye/>}
+                                </button>
                             </div>
+                        </div>
 
 
                         <div className="form-control mt-6">

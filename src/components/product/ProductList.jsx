@@ -57,7 +57,7 @@ const ProductList = () => {
                 <div className={"grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-10 w-full "}>
                     <select value={filter.brandID} className="select select-primary  w-full max-w-xs"
                             onChange={(e)=>inputOnchange("brandID",e.target.value)}>
-                        <option disabled selected> Select Brand</option>
+                        <option disabled defaultValue={"Select Brand"}> Select Brand</option>
                         {
                             brandList !== null ? (
                                 brandList.map((item, i) => {
@@ -73,7 +73,7 @@ const ProductList = () => {
 
                     <select value={filter.categoryID} className="select select-primary  w-full max-w-xs"
                             onChange={(e)=>inputOnchange("categoryID",e.target.value)}>
-                        <option disabled selected>Select Category</option>
+                        <option disabled  defaultValue={"Select Category"}>Select Category</option>
                         {
                             categoryList !== null ? (
                                 categoryList.map((item, i) => {
@@ -103,7 +103,7 @@ const ProductList = () => {
                         listProduct === null?(<FeaturedSkeleton />):(
                             listProduct.map((item,i) => {
                                 return (
-                                    <motion.div key={i} className="card shadow-2xl" whileHover={{scale: 1.05}} whileTap={{scale: 0.9}}
+                                    <motion.div key={i} className="card shadow-2xl" whileHover={{scale: 1.05}}
                                                 transition={{type: "spring", stiffness: 400, damping: 17}}>
                                         <figure className="px-3 pt-3">
                                             <img src={item['image']} alt="Shoes" className="rounded-xl max-w-sm max-h-[200px]"/>

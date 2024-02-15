@@ -29,7 +29,7 @@ const App = () => {
                :
                null
         })()
-    }, [isLogin]);
+    }, []);
 
     return (
         <div className={"max-w-screen-2xl font-poppins mx-auto"}>

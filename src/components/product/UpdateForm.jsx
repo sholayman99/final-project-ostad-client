@@ -75,7 +75,7 @@ const UpdateForm = () => {
                                 </label>
                                 <select className="select select-primary  w-full max-w-xs" value={formData.brandID}
                                         onChange={(e) => updateFormOnChange("brandID", e.target.value)}>
-                                    <option disabled selected> Select Brand</option>
+                                    <option disabled value={""}> Select Brand</option>
                                     {
                                         brandList !== null ? (
                                             brandList.map((item, i) => {
@@ -95,7 +95,7 @@ const UpdateForm = () => {
                                 </label>
                                 <select className="select select-primary  w-full max-w-xs" value={formData.categoryID}
                                         onChange={(e) => updateFormOnChange("categoryID", e.target.value)}>
-                                    <option disabled selected>Select Category</option>
+                                    <option disabled value={""}>Select Category</option>
                                     {
                                         categoryList !== null ? (
                                             categoryList.map((item, i) => {

@@ -44,7 +44,7 @@ const AppNavbar = () => {
     const navList =(
         <>
             <li>
-                <div className="input input-bordered max-w-64 lg:max-w-sm w-full flex items-center gap-2">
+                <div className="input input-bordered hover:bg-base-100 input-primary max-w-64 lg:max-w-sm w-full flex items-center gap-2">
                     <input type="text" className="grow h-full " placeholder="Search name"
                            onChange={(e)=>setSearchKeyword(e.target.value)}/>
                     <motion.button onClick={handleKeyword}

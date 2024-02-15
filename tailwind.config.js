@@ -11,7 +11,7 @@ export default {
     themes: [
       {
         mytheme: {
-          "primary": "#000000",
+          "primary": "#151414",
           "base-100": "#ffffff",
           "error": "#dc2626"
         },

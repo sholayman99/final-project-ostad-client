@@ -22,7 +22,6 @@ const productStore =create((set)=>({
         }))
     },
 
-
     addProductRequest:async(postBody)=>{
        try {
            set({isProductSubmit:true})
@@ -58,7 +57,6 @@ const productStore =create((set)=>({
     singleProduct:null,
     singleProductRequest:async(id)=>{
        try {
-           set({singleProduct:null})
            let res = await axios.get(`/readSingleProduct/${id}`,{withCredentials:true});
            if(res.data['status']==='success'){
                set({singleProduct:res.data['data']})

@@ -43,6 +43,15 @@ const userStore =create((set)=>({
             }
         }))
     },
+    avatarFormValue:{avatar:""},
+    avatarFormOnChange:(name,value)=>{
+        set((state)=>({
+            avatarFormValue:{
+                ...state.avatarFormValue,
+                [name]:value
+            }
+        }))
+    },
 
     loginFormValue:{email: "", password: ""},
     loginValueOnChange:(name,value)=>{
@@ -110,6 +119,18 @@ const userStore =create((set)=>({
        catch (e) {
            unauthorized(e.response.status);
        }
+    },
+
+    updateAvatarRequest:async(postBody)=>{
+        try {
+            set({isFormSubmit:true})
+            let res = await axios.post('/updateAvatar' , postBody,{withCredentials:true});
+            set({isFormSubmit:false});
+            return res.data['status'] === 'success';
+        }
+        catch (e) {
+            unauthorized(e.response.status);
+        }
     }
 
 }));
