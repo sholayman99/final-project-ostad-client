@@ -11,7 +11,9 @@ const ProductList = () => {
     const navigate = useNavigate();
     const [filter , setFilter] = useState({brandID:"",categoryID:""})
     const {listProduct,brandListRequest,categoryListRequest, brandList,categoryList,
-        listByFilterRequest,removeProductRequest } = productStore();
+        listByFilterRequest,removeProductRequest ,allProductListRequest} = productStore();
+
+    console.log(listProduct)
 
     const inputOnchange = (key,value)=>{
         setFilter((data)=>({
@@ -29,8 +31,9 @@ const ProductList = () => {
       if(proceed){
           let res = await removeProductRequest(id);
           if(res){
-              listProduct.filter((item)=> item['_id'] !== id)
+              // listProduct.filter((item)=> item['_id'] !== id)
               toast.success("Removed successfully");
+              await allProductListRequest();
           }
           else{
               toast.error("Something went wrong!")
