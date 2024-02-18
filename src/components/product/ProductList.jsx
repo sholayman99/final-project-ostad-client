@@ -4,7 +4,6 @@ import {motion} from "framer-motion";
 import FeaturedSkeleton from "../../skeleton/FeaturedSkeleton.jsx";
 import {Link, useNavigate} from "react-router-dom";
 import {FaTrash} from "react-icons/fa";
-import FormSkeleton from "../../skeleton/Form-Skeleton.jsx";
 import toast from "react-hot-toast";
 
 
@@ -113,10 +112,10 @@ const ProductList = () => {
                                             <p className={"text-gray-600"}>{item['des']}</p>
 
                                         </div>
-                                        <div className={"grid grid-cols-4 gap-10 px-3 pb-3"}>
+                                        <div className={"flex items-center justify-between gap-10 px-8 pb-3"}>
                                             <Link to={`/update-product/${item['_id']}`}
-                                                  className={"btn border border-primary col-span-3 bg-base-100 " +
-                                                      "hover:btn-primary"}>Edit</Link>
+                                                  className={"btn border border-primary w-[50%] bg-base-100 " +
+                                                      "hover:bg-gray-300 hover:border-primary"}>Edit</Link>
                                             <button onClick={()=>handleDelete(item['_id'])} className={"btn btn-error text-xl"}> <FaTrash /> </button>
                                         </div>
                                     </motion.div>
