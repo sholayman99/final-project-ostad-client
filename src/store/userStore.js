@@ -124,8 +124,10 @@ const userStore =create((set)=>({
     updateAvatarRequest:async(postBody)=>{
         try {
             set({isFormSubmit:true})
+            set ({isLoading:true})
             let res = await axios.post('/updateAvatar' , postBody,{withCredentials:true});
             set({isFormSubmit:false});
+            set ({isLoading:false})
             return res.data['status'] === 'success';
         }
         catch (e) {

@@ -10,7 +10,7 @@ const Footer = () => {
     return (
         <footer className={"max-w-screen-2xl shadow-2xl"}>
 
-            <section className="footer grid bg-base-200 lg:p-10 p-6 text-primary">
+            <section className="footer flex justify-between items-start bg-primary lg:p-10 p-6 text-base-100">
                 <div>
                     <img src={logo} alt={"/"}/>
                 </div>
@@ -35,6 +35,7 @@ const Footer = () => {
                     <a className="link link-hover">Cookie policy</a>
                 </nav>
             </section>
+            <div className={"h-0.5 w-full"}></div>
             <section className="footer items-center bg-primary text-base-100 lg:px-10 px-6 py-5">
                 <aside className="items-center grid-flow-col">
                     <p>Copyright © <span className={"font-semibold"}>{date}-ShoeZone</span>  All right reserved</p>

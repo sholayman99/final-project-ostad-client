@@ -9,11 +9,14 @@ const SaveForm = () => {
         brandListRequest,categoryList,categoryListRequest} = productStore();
 
     const handleSubmit = async ()=>{
-         console.log(addFormValue)
          let res = await addProductRequest(addFormValue);
          if(res){
              toast.success("Added successfully");
+             addFormValue.productName ="";
              addFormValue.image= "";
+             addFormValue.brandID ="";
+             addFormValue.categoryID ="";
+             addFormValue.des="";
          }
          else{
              toast.error("Something went wrong!");

@@ -4,19 +4,21 @@ import productStore from "../../store/productStore.js";
 import FormSkeleton from "../../skeleton/Form-Skeleton.jsx";
 import toast from "react-hot-toast";
 import {useParams} from "react-router-dom";
+import UpdateModal from "./UpdateModal.jsx";
 
 const UpdateForm = () => {
     const [formData, setFormData] = useState({productName: "",image: "",brandID: "", categoryID: "",
         des: ""});
-
+    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
     const {id} = useParams();
 
-    const {updateProductRequest,brandList,categoryList,singleProductRequest,singleProduct} = productStore();
+    const {updateProductRequest,brandList,categoryList,
+        singleProductRequest,singleProduct} = productStore();
 
 
     useEffect(() => {
         (async()=>{
-           id !==null? await singleProductRequest(id):null;
+            singleProduct === null ? await singleProductRequest(id) : null ;
             setFormData({
                 productName: singleProduct['productName'],image:singleProduct['image'],brandID:singleProduct['brandID'] ,
                 categoryID:singleProduct['categoryID'], des: singleProduct['des']
@@ -32,18 +34,27 @@ const UpdateForm = () => {
         }));
     };
     const handleSubmit = async ()=>{
-          let res = await updateProductRequest(formData,id);
-          if(res){
-              toast.success("Updated successfully");
-          }
-          else{
-              toast.error("Something went wrong!");
-          }
+             setIsDeleteModalOpen(true)
+
+         }
+
+         const onUpdate =async ()=>{
+           await handleSubmit();
+           setIsDeleteModalOpen(false);
+             let res = await updateProductRequest(formData,id);
+             if(res){
+                 toast.success("Updated successfully");
+             }
+             else{
+                 toast.error("Something went wrong!");
+             }
+         }
+
+    if(singleProduct === null){
+        return <FormSkeleton />
     }
-
-
-
-  return (
+    else{
+        return (
             <section className={"flex justify-center mt-10 items-center lg:min-h-screen md:min-h-[70vh] min-h-screen"}>
                 <div className="card">
                     <div className="card-body">
@@ -126,9 +137,12 @@ const UpdateForm = () => {
 
                     </div>
                 </div>
+              <UpdateModal onUpdate={onUpdate} isOpen={isDeleteModalOpen}
+                           onClose={() => setIsDeleteModalOpen(false)}  />
             </section>
         );
 
+    }
 };
 
 export default UpdateForm;

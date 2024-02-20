@@ -1,21 +1,17 @@
 // eslint-disable-next-line no-unused-vars
 import React, {useState} from 'react';
 import userStore from "../../store/userStore.js";
-import Avatar from "../../components/user/Avatar.jsx";
 import SubmitButton from "../../components/user/SubmitButton.jsx";
 import toast from "react-hot-toast";
 import validator from "../../utility/validator.js";
 import {FaEye, FaEyeSlash} from "react-icons/fa";
-import profile from "../../assets/images/profile.jpeg";
-import {motion} from "framer-motion";
+
 import AvatarSkeleton from "../../skeleton/Avatar-Skeleton.jsx";
 
 const Profile = () => {
-
-
     const [passwordType, setPasswordType] = useState("password");
     const {passFormValue,passFormOnChange,updatePassRequest,avatarFormOnChange,
-        avatarFormValue,updateAvatarRequest , userInfo} = userStore();
+        avatarFormValue,updateAvatarRequest ,userInfo,userInfoRequest} = userStore();
 
 
     const handlePass = async()=>{
@@ -36,6 +32,7 @@ const Profile = () => {
 
     const handleAvatar = async ()=>{
         let res = await updateAvatarRequest(avatarFormValue);
+        await userInfoRequest();
         if(res){
             toast.success("Avatar updated successfully");
             avatarFormValue.avatar ="";

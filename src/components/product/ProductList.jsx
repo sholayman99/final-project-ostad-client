@@ -1,20 +1,22 @@
 import React, {useEffect, useState} from 'react';
 import productStore from "../../store/productStore.js";
 import {motion} from "framer-motion";
-import FeaturedSkeleton from "../../skeleton/FeaturedSkeleton.jsx";
 import {Link, useNavigate} from "react-router-dom";
 import {FaTrash} from "react-icons/fa";
 import toast from "react-hot-toast";
+import ProductSkeleton from "../../skeleton/ProductSkeleton.jsx";
+import DeleteModal from "./DeleteModal.jsx";
 
 
 const ProductList = () => {
+    const [itemID,setItemID] = useState(null);
+    const [loading,setLoading] = useState(false)
     const navigate = useNavigate();
     const [filter , setFilter] = useState({brandID:"",categoryID:""})
     const {listProduct,brandListRequest,categoryListRequest, brandList,categoryList,
         listByFilterRequest,removeProductRequest ,allProductListRequest} = productStore();
 
-    console.log(listProduct)
-
+    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
     const inputOnchange = (key,value)=>{
         setFilter((data)=>({
             ...data,
@@ -26,27 +28,31 @@ const ProductList = () => {
         navigate('/add-product')
     }
 
+
     const handleDelete = async (id)=>{
-      let proceed =  window.confirm("Are you sure?");
-      if(proceed){
-          let res = await removeProductRequest(id);
-          if(res){
-              // listProduct.filter((item)=> item['_id'] !== id)
-              toast.success("Removed successfully");
-              await allProductListRequest();
-          }
-          else{
-              toast.error("Something went wrong!")
-          }
-      }
+        setItemID(id);
+        setIsDeleteModalOpen(true);
+    }
 
-
+    const onDelete =async ()=>{
+        await handleDelete();
+        setIsDeleteModalOpen(false)
+        let res = await removeProductRequest(itemID);
+        await allProductListRequest();
+        if(res){
+            toast.success("Removed successfully");
+        }
+        else{
+            toast.error("Something went wrong!")
+        }
     }
 
     useEffect(() => {
         (async ()=>{
+            setLoading(true);
             brandList === null ?await brandListRequest():null;
             categoryList === null?await categoryListRequest():null;
+            setLoading(false);
             let isEveryPropertyEmpty = Object.values(filter).every(value=> value === "");
             !isEveryPropertyEmpty ? await listByFilterRequest(filter):null ;
         })()
@@ -102,7 +108,7 @@ const ProductList = () => {
 
                 <div className={"grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-10"}>
                     {
-                        listProduct === null?(<FeaturedSkeleton />):(
+                        listProduct === null?(<ProductSkeleton />):(
                             listProduct.map((item,i) => {
                                 return (
                                     <motion.div key={i} className="card shadow-2xl" whileHover={{scale: 1.05}}
@@ -127,7 +133,9 @@ const ProductList = () => {
                         )
                     }
                 </div>
-
+                <DeleteModal isOpen={isDeleteModalOpen}
+                             onClose={() => setIsDeleteModalOpen(false)}
+                             onDelete={onDelete} />
             </section>
         );
 

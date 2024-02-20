@@ -44,9 +44,10 @@ const AppNavbar = () => {
     const navList =(
         <>
             <li>
-                <div className="input input-bordered hover:bg-base-100 input-primary max-w-64 lg:max-w-sm w-full flex items-center gap-2">
+                <div
+                    className="input input-bordered hover:bg-base-100 input-primary max-w-64 lg:max-w-sm w-full flex items-center gap-2">
                     <input type="text" className="grow h-full " placeholder="Search name"
-                           onChange={(e)=>setSearchKeyword(e.target.value)}/>
+                           onChange={(e) => setSearchKeyword(e.target.value)}/>
                     <motion.button onClick={handleKeyword}
                                    whileHover={{scale: 1.03}} whileTap={{scale: 0.9}}
                                    transition={{type: "spring", stiffness: 400, damping: 17}}
@@ -57,29 +58,38 @@ const AppNavbar = () => {
             </li>
             <li>
                 <NavLink className={({isActive}) => isActive ? "font-semibold underline " +
-                    "text-lg mt-3 lg:mt-0 lg:mx-5" : "text-lg font-semibold  mt-3 lg:mt-0 lg:mx-5"}
+                    "text-lg mt-3 lg:mt-0 lg:mx-5" : "text-lg font-medium mt-3 lg:mt-0 lg:mx-5"}
                          to={"/"}>Home</NavLink>
             </li>
+            {
+                isLogin()?(
+                    <li>
+                        <NavLink className={({isActive}) => isActive ? "font-semibold underline " +
+                            "text-lg lg:mr-5  mt-3 lg:mt-0" : "text-lg font-medium lg:mr-5  mt-3 lg:mt-0"}
+                                 to={"/products"}>Products</NavLink>
+                    </li>
+                ):null
+            }
             <li>
                 <NavLink className={({isActive}) => isActive ? "font-semibold underline " +
-                    "text-lg lg:mr-5  mt-3 lg:mt-0" : "text-lg font-semibold lg:mr-5  mt-3 lg:mt-0"}
-                         to={"/products"}>Products</NavLink>
+                    "text-lg lg:mr-5  mt-3 lg:mt-0" : "text-lg font-medium lg:mr-5  mt-3 lg:mt-0"}
+                         to={"/create-account"}>Signup</NavLink>
             </li>
             {
                 isLogin() ? (<li>
                         <motion.button whileHover={{scale: 1.05}} whileTap={{scale: 0.9}}
-                                    transition={{type: "spring", stiffness: 400, damping: 17}}
-                        onClick={handleLogout}
-                        className={"text-lg bg-base-100 max-w-[100px] border border-primary font-semibold rounded-xl " +
-                            "shadow-lg lg:mr-7 mt-3 lg:mt-0 ml-2 lg:ml-0"}>
-                        Logout
-                    </motion.button>
+                                       transition={{type: "spring", stiffness: 400, damping: 17}}
+                                       onClick={handleLogout}
+                                       className={"text-lg bg-base-100 max-w-[100px] border border-primary font-semibold rounded-xl " +
+                                           "shadow-lg lg:mr-7 mt-3 lg:mt-0 ml-2 lg:ml-0"}>
+                            Logout
+                        </motion.button>
                     </li>)
                     :
                     (<motion.button whileHover={{scale: 1.05}} whileTap={{scale: 0.9}}
                                     transition={{type: "spring", stiffness: 400, damping: 17}}
                                     onClick={handleLogin}
-                                    className={"text-lg btn btn-md btn-primary max-w-[100px] text-white font-semibold rounded-xl " +
+                                    className={"btn btn-md btn-primary max-w-[100px] text-white font-semibold rounded-xl " +
                                         "shadow-lg lg:mr-7  mt-3 lg:mt-0 mr-0 lg:ml-0"}>
                         Login
                     </motion.button>)
