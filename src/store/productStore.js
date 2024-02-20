@@ -70,7 +70,7 @@ const productStore =create((set)=>({
 
     sliderList:null,
     sliderListRequest:async()=>{
-        let res = await axios.get(`/readSliders`,{withCredentials:true});
+        let res = await axios.get(`/readSliders`);
 
         if(res.data['status']==='success'){
             set({sliderList:res.data['data']});
@@ -79,7 +79,7 @@ const productStore =create((set)=>({
 
     brandList:null,
     brandListRequest:async()=>{
-        let res = await axios.get(`/productByBrand`,{withCredentials:true});
+        let res = await axios.get(`/productByBrand`);
 
         if(res.data['status']==='success'){
             set({brandList:res.data['data']});
@@ -88,7 +88,7 @@ const productStore =create((set)=>({
 
     categoryList:null,
     categoryListRequest:async()=>{
-        let res = await axios.get(`/productByCategory`,{withCredentials:true});
+        let res = await axios.get(`/productByCategory`);
 
         if(res.data['status']==='success'){
             set({categoryList:res.data['data']});
@@ -97,7 +97,7 @@ const productStore =create((set)=>({
 
     productList:null,
     productListRequest:async()=>{
-        let res = await axios.get(`/readProducts`,{withCredentials:true});
+        let res = await axios.get(`/readProducts`);
         if(res.data['status']==='success'){
             set({productList:res.data['data']});
         }

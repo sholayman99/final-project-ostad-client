@@ -99,7 +99,7 @@ const AppNavbar = () => {
 
 
     return (
-        <div className="navbar shadow-2xl px-5 py-3 fixed top-0 right-0 z-50 max-w-screen-2xl bg-base-100">
+        <div className="navbar shadow-2xl px-5 py-3 fixed top-0  z-50 max-w-screen-2xl w-full bg-base-100">
             <div className="navbar-start">
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">

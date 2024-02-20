@@ -5,6 +5,7 @@ import FormSkeleton from "../../skeleton/Form-Skeleton.jsx";
 import toast from "react-hot-toast";
 import {useParams} from "react-router-dom";
 import UpdateModal from "./UpdateModal.jsx";
+import Loader from "../layout/Loader.jsx";
 
 const UpdateForm = () => {
     const [formData, setFormData] = useState({productName: "",image: "",brandID: "", categoryID: "",
@@ -51,7 +52,7 @@ const UpdateForm = () => {
          }
 
     if(singleProduct === null){
-        return <FormSkeleton />
+        return <Loader />
     }
     else{
         return (

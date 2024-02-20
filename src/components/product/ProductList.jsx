@@ -6,6 +6,7 @@ import {FaTrash} from "react-icons/fa";
 import toast from "react-hot-toast";
 import ProductSkeleton from "../../skeleton/ProductSkeleton.jsx";
 import DeleteModal from "./DeleteModal.jsx";
+import Loader from "../layout/Loader.jsx";
 
 
 const ProductList = () => {
@@ -58,6 +59,9 @@ const ProductList = () => {
         })()
     }, [filter]);
 
+    if(loading){
+        return <Loader />
+    }
 
         return (
             <section className={"flex justify-center items-center flex-col gap-14 mt-28 lg:px-10 lg:pt-20 md:p-10 p-5"}>

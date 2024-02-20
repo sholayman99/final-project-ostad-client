@@ -10,7 +10,7 @@ const Footer = () => {
     return (
         <footer className={"max-w-screen-2xl shadow-2xl"}>
 
-            <section className="footer flex justify-between items-start bg-primary lg:p-10 p-6 text-base-100">
+            <section className="footer flex justify-between items-start bg-primary lg:px-10 lg:py-16 p-6 text-base-100">
                 <div>
                     <img src={logo} alt={"/"}/>
                 </div>
