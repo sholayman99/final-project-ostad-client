@@ -64,7 +64,7 @@ const ProductList = () => {
     }
 
         return (
-            <section className={"flex justify-center items-center flex-col gap-14 mt-28 lg:px-10 lg:pt-20 md:p-10 p-5"}>
+            <section className={"flex justify-center items-center flex-col gap-16 mt-28 lg:px-10 lg:pt-20 md:p-10 p-5"}>
 
                 <div className={"grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-10 w-full "}>
                     <select value={filter.brandID} className="select select-primary  w-full max-w-xs"
@@ -94,7 +94,7 @@ const ProductList = () => {
                                     )
                                 })
                             ) : (
-                                <option>No brand</option>
+                                <option>No Category</option>
                             )
                         }
                     </select>
@@ -110,36 +110,43 @@ const ProductList = () => {
 
                 </div>
 
-                <div className={"grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-10"}>
-                    {
-                        listProduct === null?(<ProductSkeleton />):(
-                            listProduct.map((item,i) => {
-                                return (
-                                    <motion.div key={i} className="card shadow-2xl" whileHover={{scale: 1.05}}
-                                                transition={{type: "spring", stiffness: 400, damping: 17}}>
-                                        <figure className="px-3 pt-3">
-                                            <img src={item['image']} alt="Shoes" className="rounded-xl max-w-sm max-h-[200px]"/>
-                                        </figure>
-                                        <div className="card-body items-center text-center">
-                                            <h2 className="card-title">{item['productName']}</h2>
-                                            <p className={"text-gray-600"}>{item['des']}</p>
+                {
+                    listProduct === null ? (<ProductSkeleton />):(
+                        <div className={"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10"}>
 
-                                        </div>
-                                        <div className={"flex items-center justify-between gap-10 px-8 pb-3"}>
-                                            <Link to={`/update-product/${item['_id']}`}
-                                                  className={"btn border border-primary w-[50%] bg-base-100 " +
-                                                      "hover:bg-gray-300 hover:border-primary"}>Edit</Link>
-                                            <button onClick={()=>handleDelete(item['_id'])} className={"btn btn-error text-xl"}> <FaTrash /> </button>
-                                        </div>
-                                    </motion.div>
-                                )
-                            })
-                        )
-                    }
-                </div>
+                            {
+                                listProduct.map((item,i)=>{
+                                    return (
+                                        <motion.div key={i} className="card shadow-2xl" whileHover={{scale: 1.05}}
+                                                    transition={{type: "spring", stiffness: 400, damping: 17}}>
+                                            <figure className="px-3 pt-3">
+                                                <img src={item['image']} alt="Shoes"
+                                                     className="rounded-xl max-w-sm max-h-[200px]"/>
+                                            </figure>
+                                            <div className="card-body items-center text-center">
+                                                <h2 className="card-title">{item['productName']}</h2>
+                                                <p className={"text-gray-600"}>{item['des']}</p>
+
+                                            </div>
+                                            <div className={"flex items-center justify-between gap-10 px-8 pb-3"}>
+                                                <Link to={`/update-product/${item['_id']}`}
+                                                      className={"btn border border-primary w-[50%] bg-base-100 " +
+                                                          "hover:bg-gray-300 hover:border-primary"}>Edit</Link>
+                                                <button onClick={() => handleDelete(item['_id'])}
+                                                        className={"btn btn-error text-xl"}><FaTrash/></button>
+                                            </div>
+                                        </motion.div>
+                                    )
+                                })
+                            }
+
+                        </div>
+                    )
+                }
+
                 <DeleteModal isOpen={isDeleteModalOpen}
                              onClose={() => setIsDeleteModalOpen(false)}
-                             onDelete={onDelete} />
+                             onDelete={onDelete}/>
             </section>
         );
 
