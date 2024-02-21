@@ -14,6 +14,7 @@ import ProfilePage from "./pages/ProfilePage.jsx";
 import userStore from "./store/userStore.js";
 import AddProductPage from "./pages/AddProductPage.jsx";
 import UpdateProductPage from "./pages/UpdateProductPage.jsx";
+import NotFound from "./pages/NotFound.jsx";
 
 const App = () => {
 
@@ -46,6 +47,7 @@ const App = () => {
                     <Route path={"/profile"} element={ <ProfilePage /> } />
                     <Route path={"/add-product"} element={<AddProductPage />} />
                     <Route path={"/update-product/:id"} element={<UpdateProductPage />} />
+                    <Route path={"*"} element={<NotFound/>} />
                 </Routes>
             </BrowserRouter>
         </div>
